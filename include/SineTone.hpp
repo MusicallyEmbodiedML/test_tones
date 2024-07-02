@@ -1,18 +1,14 @@
-#ifndef _SINE_TONE_H_
-#define _SINE_TONE_H_
+#ifndef _SINE_TONE_HPP_
+#define _SINE_TONE_HPP_
 
 #include <cstdint>
-
-extern "C" {
-    void sine_tone_init(float sample_rate, float freq);
-    int32_t sine_tone_generate(void);
-}
 
 
 class SineTone {
  public:
     SineTone(float sample_rate, float freq);
     float process();
+    int32_t processInt();
 
  private:
     float sample_rate_;
@@ -22,4 +18,4 @@ class SineTone {
 
 };
 
-#endif  // _SINE_TONE_H_
+#endif  // _SINE_TONE_HPP_

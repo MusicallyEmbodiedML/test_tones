@@ -1,6 +1,5 @@
 #include "SineTone.hpp"
 #include <cmath>
-#include <new>
 #ifndef M_PI
     #define M_PI 3.14159265358979323846
 #endif
@@ -24,19 +23,9 @@ float SineTone::process()
     return y;
 }
 
-static SineTone *sine_tone_ = nullptr;
-static char sine_tone_mem_[sizeof(SineTone)];
-
-void sine_tone_init(float sample_rate, float freq) {
-    sine_tone_ = new (sine_tone_mem_) SineTone(sample_rate, freq);
-}
-
-int32_t sine_tone_generate(void) {
+int32_t SineTone::processInt()
+{
     const float scaling = std::pow(2.f, 31.f) - 1000.f;
 
-    float y = 0;
-    if (sine_tone_ != nullptr) {
-        y = sine_tone_->process();
-    }
-    return static_cast<int32_t>(y * scaling);
+    return static_cast<int32_t>(process() * scaling);
 }
