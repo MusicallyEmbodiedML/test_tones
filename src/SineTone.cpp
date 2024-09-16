@@ -25,7 +25,7 @@ float SineTone::process()
 
 int32_t SineTone::processInt()
 {
-    const float scaling = std::pow(2.f, 31.f) - 1000.f;
+    static const float scaling = std::pow(2.f, 31.f) - 1000.f;
 
     return static_cast<int32_t>(process() * scaling);
 }
